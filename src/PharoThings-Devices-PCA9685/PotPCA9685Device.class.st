@@ -207,7 +207,7 @@ PotPCA9685Device >> pwmForAllPinsPercentage: aPercentage [
 	(aPercentage < 0.01) ifTrue: [ self allPinsOnAt: 0 offAt: 4096. ^0 ].  " moet beter"
 	(aPercentage > 99.99) ifTrue: [  self allPinsOnAt: 4096 offAt: 0. ^100 ].
 	ticks :=  4096.0 * aPercentage / 100.0.
-	self allPinsOnAt: 0 offAt: ticks asInteger "no staging, all start at 0"
+	self allPinsOnAt: 0 offAt: ticks rounded "no staging, all start at 0"
 ]
 
 { #category : #initialization }
