@@ -192,7 +192,7 @@ PotPCA9685Device >> pwmForAllPinsMicroSeconds: aNumber [
 
 	| prescale ticks |
 	prescale := self prescaleValue.
-	ticks := (aNumber * clockFrequency / 1000000.0 / (prescale + 1)) asInteger.
+	ticks := (aNumber * clockFrequency / 1000000.0 / (prescale + 1)) rounded.
 	ticks := (ticks min: 4095) max: 0.
 	self allPinsOnAt: 0 offAt: ticks
 ]
@@ -217,7 +217,7 @@ PotPCA9685Device >> pwmForPin: aPinNumber microSeconds: aNumber [
 
 	| prescale ticks |
 	prescale := self prescaleValue.
-	ticks := (aNumber * clockFrequency / 1000000.0 / (prescale + 1)) asInteger.
+	ticks := (aNumber * clockFrequency / 1000000.0 / (prescale + 1)) rounded.
 	ticks := (ticks min: 4095) max: 0.
 	self pin: aPinNumber onAt: 0 offAt: ticks
 ]
@@ -231,7 +231,7 @@ PotPCA9685Device >> pwmForPin: aPinNumber percentage: aPercentage [
 	(aPercentage < 0.01) ifTrue: [ self pin: aPinNumber onAt: 0 offAt: 4096. ^0 ].
 	(aPercentage > 99.99) ifTrue: [  self pin: aPinNumber onAt: 4096 offAt: 0. ^100 ].
 	ticks :=  4096.0 * aPercentage / 100.0.
-	self pin: aPinNumber onAt: 0 offAt: ticks asInteger
+	self pin: aPinNumber onAt: 0 offAt: ticks rounded
 ]
 
 { #category : #initialization }
