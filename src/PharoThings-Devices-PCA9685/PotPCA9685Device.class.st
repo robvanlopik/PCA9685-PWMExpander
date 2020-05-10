@@ -2,25 +2,19 @@
 I am the driver for the PCA9685 16 port PWM/Servo extender
 I am controlled through the I2C bus. There can be 62 of me on the bus
 
-For the Responsibility part: Three sentences about my main responsibilities - what I do, what I know.
-
-For the Collaborators Part: State my main collaborators and one line about how I interact with them. 
-
-Public API and Key Messages
-
-- message one   
-- message two 
-- (for bonus points) how to create instances.
-
-   One simple example is simply gorgeous.
+You can change myfrequency  (30 - 2000 Hz) and on/off ratio
+I start in sleep mode.
  
-Internal Representation and Key Implementation Points.
+The internal clock is nominally 25 MHz. If you need preciser timing,youcan alter this for use in the internal calculations (adjustedClockFrequency:).
 
-    Instance Variables
-	clockFrequency:		<Object>
+Pin numbers run from 0 to 15, because that is what is used in the datasheet and also on the print
 
-
-    Implementation Points
+Main methods: 
+wakeUp - start from sleep
+frequency: - freqeuncy.Typically 50 Hz for driving servo motors, or up to 3000 Hz for LEDs
+pwmForPin:  microSeconds: - on time, used for servos in range 500 - 2500
+pwmForPin:  percentage: - percentage on time 
+pinOn: and pinOff: - to turn a pin fully ON or OFF
 "
 Class {
 	#name : #PotPCA9685Device,
